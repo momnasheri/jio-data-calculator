@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate the value of JioCoins in INR with the JioCoin Calculator. A simple, responsive, and easy-to-use tool for converting JioCoins to Indian Rupees.">
+  <title>JioCoin Calculator - Convert JioCoins to INR</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>JioCoin Calculator</h1>
+    <p>Calculate the value of your JioCoins in INR (Indian Rupees).</p>
+    
+    <div class="calculator">
+      <label for="jiocoins">Enter JioCoins:</label>
+      <input type="number" id="jiocoins" placeholder="Enter JioCoins" min="0">
+      
+      <label for="exchange-rate">Exchange Rate (1 JioCoin = INR):</label>
+      <input type="number" id="exchange-rate" value="10" readonly>
+      
+      <button id="calculate-btn">Calculate</button>
+      
+      <h2 id="result"></h2>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  color: #555;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #333;
+}// Get DOM elements
+const jioCoinsInput = document.getElementById('jiocoins');
+const exchangeRateInput = document.getElementById('exchange-rate');
+const calculateBtn = document.getElementById('calculate-btn');
+const resultElement = document.getElementById('result');
+
+// Calculate function
+calculateBtn.addEventListener('click', () => {
+  const jioCoins = parseFloat(jioCoinsInput.value);
+  const exchangeRate = parseFloat(exchangeRateInput.value);
+
+  if (isNaN(jioCoins)) {
+    resultElement.textContent = "Please enter a valid number of JioCoins.";
+    resultElement.style.color = "red";
+  } else {
+    const totalValue = jioCoins * exchangeRate;
+    resultElement.textContent = `Total Value: ₹${totalValue.toFixed(2)}`;
+    resultElement.style.color = "#333";
+  }
+});
